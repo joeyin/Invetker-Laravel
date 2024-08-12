@@ -1,6 +1,6 @@
 # Invetker
 
-![Invetker](https://raw.githubusercontent.com/joeyin/Invetker-Laravel/public/images/brand.svg)
+![Invetker](https://raw.githubusercontent.com/joeyin/Invetker-Laravel/main/public/images/brand.svg?token=GHSAT0AAAAAACNGNPS2F7UOK74YYAUVULGIZV2JTIQ)
 
 ## Description
 INVETKER is a beginner-friendly stock tracking platform with a user-friendly interface.
