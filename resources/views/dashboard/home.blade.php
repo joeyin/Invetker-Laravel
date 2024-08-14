@@ -1,10 +1,8 @@
-@extends('/shared/layout/dashboard')
+<x-dashboard-layout>
+  @section('scripts')
+    @vite(['resources/js/dashboard.js'])
+  @endsection
 
-@section('scripts')
-  <script src="/js/dashboard.js"></script>
-@endsection
-
-@section('content')
   <div class="d-inline-flex breadcrumb-wrapper align-items-center justify-content-between mb-4">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb mb-0">
@@ -33,26 +31,34 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>TSLA</td>
-              <td>20</td>
-              <td>182.14</td>
-              <td>
-                <span class="text-success">+2%</span>
-                {{-- <span class="text-danger">-2%</span> --}}
-              </td>
-              <td>3,442.8</td>
-              <td>3,642.8</td>
-              <td>172.14</td>
-              <td>
-                <span class="text-success">+20.00</span>
-                {{-- <span class="text-danger">-20.00</span> --}}
-              </td>
-              <td>
-                <span class="text-success">+20.00</span>
-                {{-- <span class="text-danger">-20.00</span> --}}
-              </td>
-            </tr>
+            @foreach ($holdings as $holding)
+              <tr>
+                <td>{{ $holding['ticker'] }}</td>
+                <td>{{ number_format($holding['quantity'], 2, '.', ',') }}</td>
+                <td>{{ number_format($holding['price'], 2, '.', ',') }}</td>
+                <td>
+                  <span class="{{ $holding['changePercent'] >= 0 ? 'text-success' : 'text-danger' }}">
+                    {{ $holding['changePercent'] >= 0 ? '+' : '' }}
+                    {{ number_format($holding['changePercent'], 2, '.', ',') }}%
+                  </span>
+                </td>
+                <td>{{ number_format($holding['cost'], 2, '.', ',') }}</td>
+                <td>{{ number_format($holding['price'] * $holding['quantity'], 2, '.', ',') }}</td>
+                <td>{{ number_format($holding['cost'] / $holding['quantity'], 2, '.', ',') }}</td>
+                <td>
+                  <span class="{{ $holding['dailypl'] >= 0 ? 'text-success' : 'text-danger' }}">
+                    {{ $holding['dailypl'] >= 0 ? '+' : '' }}
+                    {{ number_format($holding['dailypl'], 2, '.', ',') }}
+                  </span>
+                </td>
+                <td>
+                  <span class="{{ $holding['unrealizedpl'] >= 0 ? 'text-success' : 'text-danger' }}">
+                    {{ $holding['unrealizedpl'] >= 0 ? '+' : '' }}
+                    {{ number_format($holding['unrealizedpl'], 2, '.', ',') }}
+                  </span>
+                </td>
+              </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
@@ -76,24 +82,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="align-middle">
-              <td>TSLA</td>
-              <td>Bought</td>
-              <td>10</td>
-              <td>Filed</td>
-              <td>172</td>
-              <td>1.72</td>
-              <td>2024-05-13 11:20:22</td>
-            </tr>
-            <tr class="align-middle">
-              <td>TSLA</td>
-              <td>Bought</td>
-              <td>10</td>
-              <td>Filed</td>
-              <td>172</td>
-              <td>1.72</td>
-              <td>2024-05-13 11:20:22</td>
-            </tr>
+            @foreach ($transactions as $t)
+              <tr class="align-middle">
+                <td>{{ $t->ticker }}</td>
+                <td>{{ $t->action }}</td>
+                <td>{{ number_format($t->quantity, 2, '.', ',') }}</td>
+                <td>{{ number_format($t->price, 2, '.', ',') }}</td>
+                <td>{{ number_format($t->fee, 2, '.', ',') }}</td>
+                <td>{{ number_format($t->price * $t->quantity + $t->fee, 2) }}</td>
+                <td>{{ $t->datetime }}</td>
+              </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
@@ -104,46 +103,39 @@
     <div id="top-portfolio" class="card d-flex flex-column">
       <div class="title">Top Portfolio Positions</div>
       <div class="content flex-grow-1 d-flex overflow-auto">
-        @for ($i = 1; $i < 9; $i++)
+        <?php $i = 1; ?>
+        @foreach ($tops as $t)
           <div class="ranking d-flex align-items-end">
             <div class="no d-flex flex-column align-self-baseline">
               Top <span>{{ $i }}</span>
             </div>
             <img class="company-logo" alt="TLSA" aria-label="TSLA"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Tesla_logo.png/1200px-Tesla_logo.png">
+              src="{{ $t['logo'] . '?apiKey=' . env('API_KEY') }}">
             <div class="company-detail d-flex flex-column">
-              <span class="name">TSLA</span>
-              <span class="description">Overview Segment Analysis Financials Executives SWOT Analysis Locations
-                Competitors Deals Filing Analytics Patents Theme Exposure Media Premium Data Product Life Cycle Factory
-                Finder IT Services Contracts ICT Spend & Tech Priorities Related keylists View more Top 10 Original
-                Equipment Manufacturers in the World by Market Capitalization Electric Vehicles: Leading Technology
-                Companies Top 10 Automotive OEM Companies in the World in 2021 by P/E Top 9 Automotive OEMs in the US in
-                2021 by Revenue Tesla Inc (Tesla) is an automotive and energy company. It designs, develops, manufactures,
-                sells, and leases electric vehicles, energy generation, and storage systems. It produces and sells the
-                Model Y, Model 3, Model X, Model S, Cybertruck, Tesla Semi, and Tesla Roadster vehicles. Tesla also
-                installs and maintains energy systems, sells solar electricity; and offers end-to-end clean energy
-                products, including generation, storage, and consumption. It markets and sells vehicles to consumers
-                through company-owned stores and galleries. The company has manufacturing facilities in the US, Germany,
-                and China and has operations across the Asia Pacific and Europe. Tesla is headquartered in Austin, Texas,
-                the US.</span>
-              <span>POSITION: 20</span>
-              <span>PRICE: 171.99</span>
+              <span class="name">{{ $t['ticker'] }}</span>
+              <span class="description">{{ $t['description'] }}</span>
+              <span>POSITION: {{ number_format($t['quantity'], 2, '.', ',') }}</span>
+              <span>PRICE: {{ number_format($t['price'], 2, '.', ',') }}</span>
               <span>
                 DAILY P&L:
-                <span class="text-success">+350.00</span>
-                {{-- <span class="text-danger">-350.00</span> --}}
+                <span class="{{ $t['dailypl'] >= 0 ? 'text-success' : 'text-danger' }}">
+                  {{ $t['dailypl'] >= 0 ? '+' : '' }}
+                  {{ number_format($t['dailypl'], 2, '.', ',') }}
+                </span>
               </span>
               <span>
                 UNREALIZED P&L:
-                <span class="text-success">+3,500.00</span>
-                {{-- <span class="text-danger">-350.00</span> --}}
+                <span class="{{ $t['unrealizedpl'] >= 0 ? 'text-success' : 'text-danger' }}">
+                  {{ $t['unrealizedpl'] >= 0 ? '+' : '' }}
+                  {{ number_format($t['unrealizedpl'], 2, '.', ',') }}
+                </span>
               </span>
             </div>
           </div>
-        @endfor
+          <?php $i++; ?>
+        @endforeach
       </div>
     </div>
     <!-- End Top Portfolio -->
-
   </div>
-@endsection
+</x-dashboard-layout>

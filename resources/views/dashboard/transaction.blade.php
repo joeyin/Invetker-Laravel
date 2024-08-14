@@ -1,22 +1,20 @@
-@extends('/shared/layout/dashboard')
+<x-dashboard-layout>
+  @section('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.bootstrap5.min.css">
+    @vite(['resources/css/transactions.css'])
+  @endsection
 
-@section('styles')
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.bootstrap5.min.css">
-  <link rel="stylesheet" href="/css/transactions.css">
-@endsection
+  @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"></script>
+    @vite(['resources/js/transactions.js'])
+  @endsection
 
-@section('scripts')
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"></script>
-  <script src="/js/transactions.js"></script>
-@endsection
-
-@section('content')
-  @include('/shared/modal/transaction')
-  @include('/shared/modal/transaction-edit')
+  <x-transaction-modal/>
+  <x-transaction-edit-modal/>
   <div class="d-inline-flex breadcrumb-wrapper align-items-center justify-content-between mb-4">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb mb-0">
@@ -39,9 +37,12 @@
           <input type="text" class="form-control" id="daterange" name="daterange">
           <span class="input-group-text bg-light">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-              <path fill="#c3c3c3" d="M12 12h5v5h-5zm7-9h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m0 2v2H5V5zM5 19V9h14v10z" />
+              <path fill="#c3c3c3"
+                d="M12 12h5v5h-5zm7-9h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m0 2v2H5V5zM5 19V9h14v10z" />
             </svg>
           </span>
+          <input type="hidden" name="start" />
+          <input type="hidden" name="end" />
         </div>
       </div>
       <div class="col-12 col-xl-3 d-flex gap-3">
@@ -76,57 +77,40 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="align-middle">
-              <td>TSLA</td>
-              <td>Bought</td>
-              <td>10</td>
-              <td>Filed</td>
-              <td>172</td>
-              <td>1.72</td>
-              <td>2024-05-13 14:20:22</td>
-              <td>
-                <button data-id="22" type="button" class="btn btn-link btn-sm transaction-edit text-secondary">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="m18.988 2.012l3 3L19.701 7.3l-3-3zM8 16h3l7.287-7.287l-3-3L8 13z" />
-                    <path fill="currentColor"
-                      d="M19 19H8.158c-.026 0-.053.01-.079.01c-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .896-2 2v14c0 1.104.897 2 2 2h14a2 2 0 0 0 2-2v-8.668l-2 2z" />
-                  </svg>
-                </button>
-                <button data-id="22" type="button" class="btn btn-link btn-sm transaction-delete text-secondary">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="currentColor"
-                      d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
-                  </svg>
-                </button>
-              </td>
-            </tr>
-            <tr class="align-middle">
-              <td>TSLA</td>
-              <td>Bought</td>
-              <td>10</td>
-              <td>Filed</td>
-              <td>172</td>
-              <td>1.72</td>
-              <td>2024-05-13 11:20:22</td>
-              <td>
-                <button data-id="22" type="button" class="btn btn-link btn-sm transaction-edit text-secondary">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="m18.988 2.012l3 3L19.701 7.3l-3-3zM8 16h3l7.287-7.287l-3-3L8 13z" />
-                    <path fill="currentColor"
-                      d="M19 19H8.158c-.026 0-.053.01-.079.01c-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .896-2 2v14c0 1.104.897 2 2 2h14a2 2 0 0 0 2-2v-8.668l-2 2z" />
-                  </svg>
-                </button>
-                <button data-id="22" type="button" class="btn btn-link btn-sm transaction-delete text-secondary">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="currentColor"
-                      d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
-                  </svg>
-                </button>
-              </td>
-            </tr>
+            @foreach ($transactions as $t)
+              <tr class="align-middle">
+                <td>{{ $t->ticker }}</td>
+                <td>{{ $t->action }}</td>
+                <td>{{ number_format($t->quantity, 2, '.', ',') }}</td>
+                <td>{{ number_format($t->price, 2, '.', ',') }}</td>
+                <td>{{ number_format($t->fee, 2, '.', ',') }}</td>
+                <td>{{ number_format($t->price * $t->quantity + $t->fee, 2, '.', ',') }}</td>
+                <td>{{ $t->datetime }}</td>
+                <td class="d-flex">
+                  <button data-id="{{ $t->id }}" type="button"
+                    class="btn btn-link btn-sm transaction-edit text-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="m18.988 2.012l3 3L19.701 7.3l-3-3zM8 16h3l7.287-7.287l-3-3L8 13z" />
+                      <path fill="currentColor"
+                        d="M19 19H8.158c-.026 0-.053.01-.079.01c-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .896-2 2v14c0 1.104.897 2 2 2h14a2 2 0 0 0 2-2v-8.668l-2 2z" />
+                    </svg>
+                  </button>
+
+                  <form name="delete" class="mb-0" data-id="{{ $t->id }}" method="POST" action="#">
+                    @csrf
+                    <button type="submit" class="btn btn-link btn-sm transaction-delete text-secondary">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                          d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
+                      </svg>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
     </div>
   </div>
-@endsection
+</x-dashboard-layout>
