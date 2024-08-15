@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Vite;
 use Scheb\YahooFinanceApi\ApiClientFactory;
 
 class DashboardController extends Controller
@@ -63,7 +64,7 @@ class DashboardController extends Controller
         $holding['changePercent'] = $quote->getRegularMarketChangePercent();
         $holding['dailypl'] = $marketChange * floatval($holding['quantity']);
         $holding['unrealizedpl'] = $price * floatval($holding['quantity']) - $holding['cost'];
-        $holding['logo'] = '/images/brand.svg';
+        $holding['logo'] = Vite::asset('/resources/images/brand.svg');
         $holding['description'] = 'Too Many Requests, the free plan only allows 5 requests per minute.';
 
         $response = Http::get('https://api.polygon.io/v3/reference/tickers/' . $ticker, [

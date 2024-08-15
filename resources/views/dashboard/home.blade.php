@@ -105,6 +105,7 @@
       <div class="content flex-grow-1 d-flex overflow-auto">
         <?php $i = 1; ?>
         @foreach ($tops as $t)
+          @if($t['unrealizedpl'] > 0)
           <div class="ranking d-flex align-items-end">
             <div class="no d-flex flex-column align-self-baseline">
               Top <span>{{ $i }}</span>
@@ -132,6 +133,7 @@
               </span>
             </div>
           </div>
+          @endif
           <?php $i++; ?>
         @endforeach
       </div>
