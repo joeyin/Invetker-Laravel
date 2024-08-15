@@ -15,7 +15,8 @@ INVETKER is a beginner-friendly platform designed to simplify stock tracking wit
 INVETKER provides users with a robust platform for managing their U.S. stock investments. Users can create and manage multiple investment portfolios, each dedicated to tracking various U.S. stocks. The platform allows users to add, edit, and remove stocks within their portfolios. For each stock, users can view key details such as the current price, purchase price, quantity held, and the overall gain or loss. The system offers an overview of the portfolio’s total value and performance, helping users make informed investment decisions. The interface is user-friendly, facilitating easy portfolio management and performance tracking.
 
 ## Database Schema
-![Invetker - Schema](./documents/schema.png)
+<img width="520" src="./documents/schema.png" alt="Database Schema" />
+
 The database schema for INVETKER is designed to effectively manage user data and stock transactions.
 
 The Users table holds essential information, including usernames, unique emails, and securely hashed passwords.
