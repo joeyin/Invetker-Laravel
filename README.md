@@ -35,17 +35,17 @@ The About table records the product description that will be displayed on the fr
 1. Set Up Environment Configuration:
  - Duplicate the `env.sample.php` file and rename it to `env.php`.
  - Open `env.php` and update it with your environment-specific settings.
-2. Run Database Migrations:
+2. Install PHP Dependencies:
+```
+composer install
+```
+3. Run Database Migrations:
 ```
 php artisan migrate
 ```
-3. Seed the Database:
+4. Seed the Database:
 ```
 php artisan db:seed
-```
-4. Install PHP Dependencies:
-```
-composer install
 ```
 5. Install JavaScript Libraries:
 ```
