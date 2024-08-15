@@ -4,6 +4,12 @@
 
 # Invetker
 
+![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)
+![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+
 ## Introduction
 INVETKER is a beginner-friendly platform designed to simplify stock tracking with an intuitive interface. It offers clear charts for easy performance monitoring and a real-time ranking system to provide key insights into your rate of return. Ideal for new investors or those seeking an effortless portfolio management solution, INVETKER delivers straightforward tools and clarity to help you gain confidence in the market.
 
