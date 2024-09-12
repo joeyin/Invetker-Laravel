@@ -77,9 +77,6 @@ php artisan serve
 ![Invetker - Transactions](./documents/screenshots/transactions.png)
 **Transactions** - Displays all transactions for the current user and allows the user to customize filters by ticker or date.
 
-## Reflection
-Laravel is a really powerful PHP framework that offers everything you need, with clear and easily accessible documentation. The most important thing is that it reduces the gap in writing SQL, which I really love, especially for preventing SQL injection. The folder structure is also well-designed, although it can feel inconvenient at times during development. However, once you get used to it, you'll find it incredibly helpful and easy to manage your project.
-
 ## Notes
 1. Integrating the Polygon API: This API provides stock information. Please note that the free plan allows only 5 requests per minute.
 2. Admin Access: The "dashboard/about" page is accessible only to admins. The DatabaseSeeder will automatically add an admin account upon import, with the following credentials: (Email: service@good-series.com, Password: 12345678).
