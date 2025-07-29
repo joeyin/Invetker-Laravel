@@ -2,7 +2,7 @@
   <img src="./resources/images/brand.svg" width="280" alt="Invetker" />
 </p>
 
-# Invetker
+# INVETKER
 
 ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)
 ![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white)
@@ -62,19 +62,19 @@ php artisan serve
 ```
 
 ## Screenshots
-![Invetker - Home](./documents/screenshots/home.png)
+![INVETKER - Home](./documents/screenshots/home.png)
 **Home**
 
-![Invetker - About](./documents/screenshots/about.png)
+![INVETKER - About](./documents/screenshots/about.png)
 **About** - The content can be updated by an admin.
 
-![Invetker - Dashboard](./documents/screenshots/dashboard.png)
+![INVETKER - Dashboard](./documents/screenshots/dashboard.png)
 **Dashboard** - Displays all holdings with current profit for the user, recent transactions, and top portfolio positions along with ticker information.
 
-![Invetker - Add Transaction](./documents/screenshots/add-transaction.png)
+![INVETKER - Add Transaction](./documents/screenshots/add-transaction.png)
 **Add Transaction** - Allows users to add transactions, requiring the ticker, quantity, action, price, fee, and date/time.
 
-![Invetker - Transactions](./documents/screenshots/transactions.png)
+![INVETKER - Transactions](./documents/screenshots/transactions.png)
 **Transactions** - Displays all transactions for the current user and allows the user to customize filters by ticker or date.
 
 ## Notes
@@ -84,7 +84,7 @@ php artisan serve
 
 ---
 
-## References
+## References & Project Links
 
 Wireframe: https://www.figma.com/proto/TF7iwR3XOIAfW4w1ThJiEE
 
